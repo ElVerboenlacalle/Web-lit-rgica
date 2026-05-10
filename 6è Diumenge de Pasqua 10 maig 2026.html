@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La revolta de l'amor en un món que ens vol orfes</title>
+    
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)'], ['$$', '$$'], ['\\[', '\\]']], 
+                displayMath: []
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #8b7355;
+            --accent-color: #c9a961;
+            --bg-light: #faf9f6;
+            --text-dark: #2c2c2c;
+            --text-medium: #555;
+            --border-subtle: #e8e4de;
+            --nav-bg: rgba(255, 255, 255, 0.97);
+        }
+
+        body {
+            font-family: 'Crimson Text', 'Georgia', serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--primary-color);
+        }
+
+        /* ========== NAVIGATION BAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+
+        .nav-logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(201, 169, 97, 0.08);
+        }
+
+        .nav-link.active {
+            color: var(--accent-color);
+            background: rgba(201, 169, 97, 0.12);
+            font-weight: 600;
+        }
+
+        /* Mobile Menu Toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 8px;
+            background: none;
+            border: none;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 2.5px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(135deg, #f5f3ef 0%, #ebe7df 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(201, 169, 97, 0.08) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 30px); }
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+            color: var(--primary-color);
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 35px;
+            font-weight: 400;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tagline {
+            font-size: 1.15rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .decorative-line {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            margin: 30px auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Table of Contents Box */
+        .toc-box {
+            max-width: 800px;
+            margin: 40px auto 0;
+            background: white;
+            padding: 35px 45px;
+            border-radius: 10px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            position: relative;
+            z-index: 1;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .toc-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #fdfcfa;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item:hover {
+            transform: translateX(5px);
+            background: white;
+            border-left-color: var(--accent-color);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .toc-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .toc-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 90px 0;
+            background: white;
+            scroll-margin-top: 90px;
+        }
+
+        .content-section:nth-child(even) {
+            background: #fdfcfa;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        /* Reading Sections */
+        .reading-block {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: #fefefe;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .reading-block:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .reading-title {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .reading-content {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--text-dark);
+            text-align: justify;
+        }
+
+        .reading-content p {
+            margin-bottom: 20px;
+        }
+
+        .psalm-refrain {
+            font-style: italic;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin: 25px 0;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .psalm-verse {
+            margin-left: 20px;
+            margin-bottom: 18px;
+        }
+
+        .separator {
+            text-align: center;
+            margin: 45px 0;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            letter-spacing: 10px;
+        }
+
+        /* Gospel Highlight */
+        .gospel-container {
+            background: linear-gradient(135deg, #f9f7f4 0%, #f5f2ed 100%);
+            padding: 60px 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            position: relative;
+        }
+
+        .gospel-quote {
+            font-size: 1.3rem;
+            line-height: 2.1;
+            font-style: italic;
+            color: var(--text-dark);
+            padding: 30px 40px;
+            border-left: 5px solid var(--secondary-color);
+            background: white;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .gospel-quote::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 4rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .word-of-lord {
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-top: 35px;
+            letter-spacing: 1px;
+        }
+
+        /* Reflection Section */
+        .reflection-intro {
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .reflection-highlight {
+            background: linear-gradient(to right, rgba(201, 169, 97, 0.1), transparent);
+            padding: 35px 40px;
+            margin: 40px 0;
+            border-radius: 6px;
+            font-size: 1.25rem;
+            font-style: italic;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .subsection-title {
+            font-size: 1.65rem;
+            color: var(--secondary-color);
+            margin: 45px 0 25px;
+            font-weight: 600;
+        }
+
+        .reflection-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Prayer Section */
+        .prayer-container {
+            background: linear-gradient(135deg, #f8f6f2 0%, #fff 100%);
+            padding: 60px 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+        }
+
+        .prayer-stanza {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 28px;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-subtle);
+            transition: border-color 0.3s ease;
+        }
+
+        .prayer-stanza:hover {
+            border-left-color: var(--accent-color);
+        }
+
+        .amen {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border-subtle);
+            letter-spacing: 2px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--nav-bg);
+                flex-direction: column;
+                padding: 20px;
+                gap: 5px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.4s ease;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 12px 20px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .reading-block,
+            .gospel-container,
+            .prayer-container,
+            .toc-box {
+                padding: 30px 25px;
+            }
+
+            .gospel-quote {
+                padding: 25px 20px;
+                font-size: 1.15rem;
+            }
+
+            .content-section {
+                padding: 60px 0;
+            }
+
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 100px 15px 60px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: var(--accent-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">La revolta <span>de l'amor</span></a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#lectures" class="nav-link">Lectures</a></li>
+                <li><a href="#evangeli" class="nav-link">Evangeli</a></li>
+                <li><a href="#reflexio" class="nav-link">Reflexió</a></li>
+                <li><a href="#accio-gracies" class="nav-link">Acció de Gràcies</a></li>
+            </ul>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="container">
+            <p class="hero-tagline">Lectura, reflexió i oració contemplativa</p>
+            <div class="decorative-line"></div>
+            <h1 class="hero-title">La revolta de l'amor</h1>
+            <h2 class="hero-subtitle">en un món que ens vol orfes</h2>
+            <p class="hero-description">
+                Un text sobre l'Esperit Sant com a força transformadora que ens allibera de la solitud i ens porta cap a la plenitud de l'amor diví.
+            </p>
+
+            <!-- Table of Contents -->
+            <div class="toc-box">
+                <h3 class="toc-title">📖 Índex de Continguts</h3>
+                <div class="toc-list">
+                    <a href="#lectures" class="toc-item">
+                        <span class="toc-number">1</span>
+                        <span class="toc-text">Lectures del dia</span>
+                    </a>
+                    <a href="#evangeli" class="toc-item">
+                        <span class="toc-number">2</span>
+                        <span class="toc-text">Evangeli</span>
+                    </a>
+                    <a href="#reflexio" class="toc-item">
+                        <span class="toc-number">3</span>
+                        <span class="toc-text">Reflexió</span>
+                    </a>
+                    <a href="#accio-gracies" class="toc-item">
+                        <span class="toc-number">4</span>
+                        <span class="toc-text">Acció de Gràcies</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lectures del dia -->
+    <section class="content-section" id="lectures">
+        <div class="container">
+            <h2 class="section-title">Lectures del dia</h2>
+
+            <!-- Primera lectura -->
+            <div class="reading-block">
+                <h3 class="reading-title">Primera lectura — Fets dels Apòstols 8, 5-8. 14-17</h3>
+                <div class="reading-content">
+                    <p>En aquells dies, Felip va baixar a la ciutat de Samària i hi predicava el Crist. La multitud escoltava amb atenció el que deia Felip, perquè sentien parlar dels senyals miraculosos que feia i veien com els esperits impurs sortien de molts posseïts, cridant amb gran veu, i molts paralítics i coixos quedaven curats. I va haver-hi una gran alegria en aquella ciutat.</p>
+                    <p>Quan els apòstols que eren a Jerusalem van saber que Samària havia acollit la paraula de Déu, els van enviar Pere i Joan. Aquests van baixar i van pregar per ells perquè rebessin l'Esperit Sant; encara no havia baixat sobre cap d'ells, sinó que només havien estat batejats en el nom del Senyor Jesús. Llavors els imposaven les mans, i rebien l'Esperit Sant.</p>
+                </div>
+            </div>
+
+            <div class="separator">✦</div>
+
+            <!-- Salmo responsorial -->
+            <div class="reading-block">
+                <h3 class="reading-title">Salmo responsorial — Salmo 65</h3>
+                <div class="psalm-refrain">R/ Aclameu Déu, tota la terra.</div>
+                <div class="reading-content">
+                    <p class="psalm-verse">Aclameu Déu, tota la terra; celebreu la glòria del seu nom, doneu-li glòria i lloança. R/</p>
+                    <p class="psalm-verse">Tota la terra adora i canta la vostra lloança, canta el vostre nom. R/</p>
+                    <p class="psalm-verse">Veneu a veure les meravelles de Déu, les seves proeses en favor dels homes: convertit el mar en terra eixuta, i passaren el riu a peu sec. R/</p>
+                    <p class="psalm-verse">Beneïu els pobles el nostre Déu, feu ressonar la seva lloança; ell ens guarda la vida i no deixa que els nostres peus trontollin. R/</p>
+                </div>
+            </div>
+
+            <div class="separator">✦</div>
+
+            <!-- Segona lectura -->
+            <div class="reading-block">
+                <h3 class="reading-title">Segona lectura — 1 Pere 3, 15-18</h3>
+                <div class="reading-content">
+                    <p>Estimeu el Crist com a Senyor en el vostre cor. Estigueu sempre a punt per donar una resposta a tothom qui us demani raó de l'esperança que teniu, però feu-ho amb dol i amb respecte, conservant la vostra consciència neta, perquè, quan sigueu acusats, quedeu confosos els qui insulten la vostra bona conducta en el Crist. Val més patir fent el bé, si aquesta és la voluntat de Déu, que patir fent el mal.</p>
+                    <p>Perquè Crist va patir una vegada pels pecats, el just pels injustos, per conduir-vos a Déu. Mort en la carn, fou retornat a la vida per l'Esperit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Evangeli -->
+    <section class="content-section" id="evangeli">
+        <div class="container">
+            <h2 class="section-title">Evangeli</h2>
+            
+            <div class="gospel-container">
+                <h3 class="reading-title" style="text-align: center;">Joan 14, 15-21</h3>
+                <p style="font-size: 1.15rem; margin-bottom: 25px; text-align: center; color: var(--text-medium);">
+                    En aquell temps, Jesús digué als seus deixebles:
+                </p>
+                
+                <blockquote class="gospel-quote">
+                    «Si m'estimeu, guardareu els meus manaments. Jo pregaré al Pare, i ell us donarà un altre Defensor perquè estigui amb vosaltres per sempre, l'Esperit de la veritat. El món no el pot rebre, perquè no el veu ni el coneix; vosaltres, en canvi, el coneixeu, perquè resta amb vosaltres i és en vosaltres.
+                    <br><br>
+                    No us deixaré orfes; torno a vosaltres. D'aquí a poc temps, el món no em veurà més, però vosaltres em veureu, perquè jo visc, i vosaltres també viureu.
+                    <br><br>
+                    Aquell dia sabreu que jo sóc en el meu Pare, i vosaltres en mi, i jo en vosaltres. El qui guarda els meus manaments és qui m'estima; i el qui m'estima serà estimat pel meu Pare, i jo també l'estimaré i em manifestaré a ell».
+                </blockquote>
+
+                <p class="word-of-lord">Paraula del Senyor</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reflexió -->
+    <section class="content-section" id="reflexio">
+        <div class="container">
+            <h2 class="section-title">Reflexió: La revolta de l'amor</h2>
+
+            <h3 class="subsection-title">Una revolució íntima contra la solitud</h3>
+            
+            <p class="reflection-text">
+                Avui ens endinssem just en aquell instant de penombra densa i angoixa del Sant Sopar. Els deixebles senten com el terra trontolla sota els seus peus; intueixen la traïció, la violència i l'ombra d'un sistema imperial i religiós que està a punt de triturar el seu mestre.
+            </p>
+
+            <p class="reflection-text">
+                I és precisament allí, mirant aquells rostres desencantats pel pànic, en Jesús llança una promesa que encara avui fa tremolar els fonaments de la història humana:
+            </p>
+
+            <div class="reflection-highlight">
+                «No us deixaré orfes. Jo pregaré al Pare, i ell us donarà un altre Defensor perquè estigui amb vosaltres per sempre, l'Esperit de la veritat».
+            </div>
+
+            <p class="reflection-text">
+                No són paraules de combat amables, sinó el detonant d'una <strong>revolució íntima</strong> que estripa, d'una vegada per totes, la nostra condemna a la solitud.
+            </p>
+
+            <h3 class="subsection-title">El context actual</h3>
+
+            <p class="reflection-text">
+                Atura't a respirar un moment i contempla la ciutat, el barri o la feina que t'envolta. Som, en la nostra essència més cru d'avui dia, una societat que sagna profundament per la ferida de l'orfandat.
+            </p>
+
+            <p class="reflection-text">
+                Ens han intentat convèncer amb discursos brillants que estem més acompanyats que mai gràcies a la connexió digital interrompuda, però la veritat que palem cada nit és una epidèmia de solitud gèlida que s'escola per les esquerdes de les nostres cases.
+            </p>
+
+            <p class="reflection-text">
+                Ens sentim profundament orfes de lideratges honestos en un panorama sociopolític dominat per l'estratègia del llanç, la mentida i la divisió permanent; una polarització tòxica que ha substituït la noble vocació de treballar pel bé comú per una guerra d'egos que esmolaa els punts de la convivència.
+            </p>
+
+            <p class="reflection-text">
+                Vivim egotats sota el jou d'una maquinària econòmica implacable que taxa el teu valor exclusivament per la teva capacitat de produir i de consumir voraçment, una inflació que ofega l'esperança i un sistema que descarta els nostres grans com a material sobrant i nega als joves la possibilitat d'imaginar un futur digna.
+            </p>
+
+            <p class="reflection-text">
+                Enmig d'aquesta tempesta perfecta, busquem la nostra identitat en l'aprovació fugaç d'un algoritme informàtic, oferint-nos en una crisi existencial que ens desdibuixa el rostre i ens anestesia l'ànima.
+            </p>
+
+            <h3 class="subsection-title">L'irrupció de l'Esperit</h3>
+
+            <p class="reflection-text">
+                És exactament en aquesta trinxera fosca on el Defensor, l'<strong>Esperit de la veritat</strong>, fa la seva irrupció.
+            </p>
+
+            <p class="reflection-text">
+                Jesús emprèn la figura del Paràclit, l'advocat que en l'antiguitat es col·locava incondicionalment al costat de l'acusat per donar la cara per ell davant del tribunal. Avui, la nostra cultura actua com un jutjat implacable que mesura i condemna al fracàs si no ets prou productiu, prou atractiu o prou èxit.
+            </p>
+
+            <p class="reflection-text">
+                I és just en aquest abisme d'exigència on l'Esperit Sant es planta fermament al teu costat per fer callar les veus acusadores d'aquest món. Ell xiuxueja al teu cor que la teva dignitat no es negocia en cap mercat de valors, que tu ets l'Hàbitacle sagrat d'un amor que no té preu.
+            </p>
+
+            <p class="reflection-text">
+                Jesús ja advertí que el món no pot rebre aquest Esperit perquè ni el veu ni el coneix, atès que l'engranatge de l'Ego i del capital és constitutivament cec a la bellesa de la gratuïtat, a l'entrega desinteressada i a la compassió que no busca treure'n profit.
+            </p>
+
+            <p class="reflection-text">
+                Rebre l'Esperit avui exigeix un acte de <strong>rebel·lió conscient</strong>: negar-nos a ser còmplices d'aquest procés de deshumanització que pretén convertir-nos en simples consumidors espantats.
+            </p>
+
+            <p class="reflection-text">
+                Estimar el Crist, tal com Ell demana que guardem els seus manaments, no significa caure en el vell parany d'una moralitat rígida de compliments externs o culpes asfixiants. Seguir el seu manament és encarnar el seu bateg misericordiós al bell mig del carrer, tal com ens ensenya la fonamenta tradició de l'espiritualitat ignasiana i dominica, esdevenint autèntics contemplatius en l'acció.
+            </p>
+
+            <h3 class="subsection-title">La força creadora de l'amor</h3>
+
+            <p class="reflection-text">
+                L'Església no té sentit si es refugia en sagristies de puresa mentre el món de fora es crema de ràbia i pobresa. Som enviats a embrutar-nos les mans, a tocar les llagues d'aquesta societat on la ferida és més dolorosa, a ser la veu incòmoda que defensa el rostre de l'immigrant, del malalt solitari i del treballador explotat.
+            </p>
+
+            <p class="reflection-text">
+                La meravella alliberadora de l'Evangeli arriba al seu zenit quan Jesús et diu:
+            </p>
+
+            <div class="reflection-highlight">
+                «Jo sóc en el meu Pare, i vosaltres en mi, i jo en vosaltres».
+            </div>
+
+            <p class="reflection-text">
+                No ets una peça llançada a l'atzar, portes dins la força creadora capaç de capgirar la tristesa en joia i d'instaurar la inabastable esperança del Regne.
+            </p>
+
+            <p class="reflection-text">
+                Tot aquest consol, tot aquest força divina, se t'ha regalat no per guardar-la en un calaix d'espiritualitat barata, sinó per abocar-la a l'asfalt trencat de la nostra història.
+            </p>
+
+            <p class="reflection-text" style="margin-top: 35px; font-size: 1.2rem; font-weight: 500;">
+                Si l'Esperit de la veritat ja batega a les teves entranyes defensant la teva dignitat inalienable, a què esperes demà al matí per deixar de viure com un orfe espantat i començar a estimar, allà on més cou la indiferència, amb la gosadia imparable d'un fill lliure?
+            </p>
+        </div>
+    </section>
+
+    <!-- Acció de Gràcies -->
+    <section class="content-section" id="accio-gracies">
+        <div class="container">
+            <h2 class="section-title">Acció de Gràcies</h2>
+
+            <div class="prayer-container">
+                <h3 class="subsection-title" style="text-align: center; margin-top: 0;">Oració d'acció de gràcies</h3>
+
+                <p class="prayer-stanza">
+                    Gràcies, Senyor Jesús, per llançar aquella promesa que fa tremolar la història just en la foscor i l'angoixa del Sant Sopar, enviant-nos l'Esperit de la veritat.
+                </p>
+
+                <p class="prayer-stanza">
+                    Gràcies per trencar per sempre la nostra condemna a la solitud, assegurant-nos que mai ens deixareu orfes enmig d'un món gèlid que sovint ens abandona i ens buida l'ànima.
+                </p>
+
+                <p class="prayer-stanza">
+                    Gràcies pel regal immens d'aquest Defensor incondicional, que es planta fermament al nostre costat per fer callar les veus acusadores d'una societat que només valora pel que produeix.
+                </p>
+
+                <p class="prayer-stanza">
+                    Gràcies per xiuxuejar al nostre cor que la nostra dignitat inalienable no es negocia en cap mercat, i que som l'Hàbitacle sagrat d'un amor gratuït que no té preu.
+                </p>
+
+                <p class="prayer-stanza">
+                    Gràcies per ensenyar-nos que estimar-te no és refugiar-nos en pures buides ni en moralismes rígids, sinó encarnar el teu bateg misericordiós al bell mig del carrer.
+                </p>
+
+                <p class="prayer-stanza">
+                    Gràcies per cridar-nos a ser autèntics contemplatius en l'acció, convidant-nos a embrutar-nos les mans per defendre amb valentia el rostre de l'immigrant, del malalt solitari i de l'explotat.
+                </p>
+
+                <p class="prayer-stanza">
+                    Gràcies per la meravella alliberadora de saber que Tu ets en el Pare, nosaltres en Tu, i Tu en nosaltres, infonent-nos una força creadora capaç de capgirar qualsevol tristesa.
+                </p>
+
+                <p class="prayer-stanza">
+                    Gràcies per regalar-nos la gosadia de deixar de viure com a orfes espantats, impulsant-nos a abocar la teva esperança inabastable sobre l'asfalt trencat de la nostra història.
+                </p>
+
+                <p class="amen">Amén. Alleluia!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" title="Tornar a dalt">↑</button>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Text Litúrgic i Contemplatiu • La revolta de l'amor en un món que ens vol orfes</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Navigation and Interactions -->
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            // Navbar shadow on scroll
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Back to top button visibility
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+
+            // Update active nav link based on scroll position
+            updateActiveNavLink();
+        });
+
+        // Mobile Menu Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Update Active Navigation Link
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('.content-section, .hero-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Back to Top Functionality
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize active state on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateActiveNavLink();
+        });
+    </script>
+
+</body>
+</html>
